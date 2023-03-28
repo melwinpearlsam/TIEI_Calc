@@ -1,11 +1,11 @@
+import 'package:calculator/constants/enums.dart';
 import 'package:get/get.dart';
 
 class CalculateController extends GetxController {
-  // Define the RxStrings for the input fields
-
+  RxString engineVariant = EngineVariant.OnePointFive.getVariant.obs;
   List<RxString> input = List.generate(10, (_) => ''.obs);
   List<RxString> inputSums = List.generate(5, (_) => ''.obs);
-
+  List<RxString> metalSelect = List.generate(5, (index) => ''.obs);
   int parseInput(RxString input) {
     if (input.value == '') {
       return 0;
@@ -25,4 +25,6 @@ class CalculateController extends GetxController {
     inputSums[4].value =
         (parseInput(input[4]) + parseInput(input[9])).toString();
   }
+
+  void calculateMetalSelect() {}
 }

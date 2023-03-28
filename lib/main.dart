@@ -1,5 +1,5 @@
 import 'package:calculator/bindings/app_binding.dart';
-import 'package:calculator/screens/variant_select.dart';
+import 'package:calculator/screens/calculate.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const VariantSelectScreen(),
+      home: CalculateWidget(),
     );
   }
 }

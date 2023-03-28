@@ -7,19 +7,14 @@ import 'package:get/get.dart';
 class CalculateWidget extends StatelessWidget {
   CalculateWidget({
     super.key,
-    required this.engineVariant,
   });
-
-  final String engineVariant;
 
   final controller = Get.find<CalculateController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('$engineVariant Variant'),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -49,7 +44,7 @@ class CalculateWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 16.0),
                   Builder(builder: (context) {
-                    if (engineVariant ==
+                    if (controller.engineVariant.value ==
                         EngineVariant.OnePointFive.getVariant) {
                       return const SizedBox();
                     }
@@ -85,7 +80,7 @@ class CalculateWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 16.0),
                   Builder(builder: (context) {
-                    if (engineVariant ==
+                    if (controller.engineVariant.value ==
                         EngineVariant.OnePointFive.getVariant) {
                       return const SizedBox();
                     }
@@ -121,7 +116,7 @@ class CalculateWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 16.0),
                   Builder(builder: (context) {
-                    if (engineVariant ==
+                    if (controller.engineVariant.value ==
                         EngineVariant.OnePointFive.getVariant) {
                       return const SizedBox();
                     }
@@ -141,28 +136,29 @@ class CalculateWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: _buildSquareTextConatiner(controller.inputSums[0]),
+                    child: _buildSquareTextConatiner(controller.metalSelect[0]),
                   ),
                   const SizedBox(width: 16.0),
                   Expanded(
-                    child: _buildSquareTextConatiner(controller.inputSums[1]),
+                    child: _buildSquareTextConatiner(controller.metalSelect[1]),
                   ),
                   const SizedBox(width: 16.0),
                   Expanded(
-                    child: _buildSquareTextConatiner(controller.inputSums[2]),
+                    child: _buildSquareTextConatiner(controller.metalSelect[2]),
                   ),
                   const SizedBox(width: 16.0),
                   Expanded(
-                    child: _buildSquareTextConatiner(controller.inputSums[3]),
+                    child: _buildSquareTextConatiner(controller.metalSelect[3]),
                   ),
                   const SizedBox(width: 16.0),
                   Builder(builder: (context) {
-                    if (engineVariant ==
+                    if (controller.engineVariant.value ==
                         EngineVariant.OnePointFive.getVariant) {
                       return const SizedBox();
                     }
                     return Expanded(
-                      child: _buildSquareTextConatiner(controller.inputSums[4]),
+                      child:
+                          _buildSquareTextConatiner(controller.metalSelect[4]),
                     );
                   }),
                 ],
