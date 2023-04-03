@@ -13,12 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialBinding: AppBindings(),
-      title: 'Calculator',
-      theme: ThemeData(
-        useMaterial3: true,
-        primarySwatch: Colors.blue,
-      ),
+      title: 'Metal Bearing Calc',
+      theme: ThemeData(primarySwatch: Colors.lightGreen, useMaterial3: true),
       home: CalculateWidget(),
     );
   }
