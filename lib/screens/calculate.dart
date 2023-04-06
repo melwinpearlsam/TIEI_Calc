@@ -279,7 +279,7 @@ class CalculateWidget extends StatelessWidget {
     return Column(
       children: [
         AnimatedContainer(
-          height: 100,
+          height: 80,
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           decoration: BoxDecoration(
@@ -340,9 +340,9 @@ class CalculateWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: Center(child: Obx(() {
-        return Text(value.value.toString(),
+        return Text(value.value == 0 ? '' : value.value.toString(),
             style: const TextStyle(
-              fontSize: 68,
+              fontSize: 80,
               fontWeight: FontWeight.bold,
             ));
       })),
