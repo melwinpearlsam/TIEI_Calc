@@ -1,4 +1,5 @@
 import 'package:calculator/components/variant_button.dart';
+import 'package:calculator/constants/colors.dart';
 import 'package:calculator/constants/enums.dart';
 import 'package:calculator/constants/sizes.dart';
 import 'package:calculator/controllers/calculate.dart';
@@ -36,12 +37,7 @@ class CalculateWidget extends StatelessWidget {
                               onPressed: () {
                                 controller.changeVariant(
                                     EngineVariant.OnePointFive.getVariant);
-                                if (controller.inputSums[1].value != 0) {
-                                  controller.calculateMetalSelect(1);
-                                }
-                                if (controller.inputSums[2].value != 0) {
-                                  controller.calculateMetalSelect(2);
-                                }
+                               controller.resetFields();
                               },
                               label: EngineVariant.OnePointFive.getVariant),
                           VariantButton(
@@ -49,12 +45,7 @@ class CalculateWidget extends StatelessWidget {
                               onPressed: () {
                                 controller.changeVariant(
                                     EngineVariant.Two.getVariant);
-                                if (controller.inputSums[1].value != 0) {
-                                  controller.calculateMetalSelect(1);
-                                }
-                                if (controller.inputSums[2].value != 0) {
-                                  controller.calculateMetalSelect(2);
-                                }
+                               controller.resetFields();
                               },
                               label: EngineVariant.Two.getVariant),
                           VariantButton(
@@ -93,10 +84,10 @@ class CalculateWidget extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 'J - ${index + 1}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.blueGrey[900],
+                                  color: primaryColor,
                                 ),
                               ),
                             ),
@@ -139,7 +130,8 @@ class CalculateWidget extends StatelessWidget {
                                       child: _buildSquareTextField(
                                           textcontroller:
                                               controller.input[index].value,
-                                          index: index),
+                                          index: index,
+                                          line: EngineLine.Crank.getLine),
                                     ))
                             .expand((widget) =>
                                 [widget, const SizedBox(width: 16.0)])
@@ -178,7 +170,8 @@ class CalculateWidget extends StatelessWidget {
                                       child: _buildSquareTextField(
                                           textcontroller:
                                               controller.input[index + 5].value,
-                                          index: index),
+                                          index: index,
+                                          line: EngineLine.Block.getLine),
                                     ))
                             .expand((widget) =>
                                 [widget, const SizedBox(width: 16.0)])
@@ -188,7 +181,7 @@ class CalculateWidget extends StatelessWidget {
                     height: 12,
                   ),
                   const Text(
-                    'Bearing Metal',
+                    'Bearing Metal - Calculated Result',
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
@@ -228,6 +221,50 @@ class CalculateWidget extends StatelessWidget {
                       }),
                     ],
                   ),
+                  const SizedBox(height: 20,),
+                   Obx(
+                    () => Row(
+                      children: List.generate(
+                        controller.engineVariant.value ==
+                                EngineVariant.OnePointFive.getVariant
+                            ? 4
+                            : 5,
+                        (index) => Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 3,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                'J - ${index + 1}',
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                          .expand(
+                            (widget) => [
+                              widget,
+                              const SizedBox(width: 16.0),
+                            ],
+                          )
+                          .toList(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -238,7 +275,7 @@ class CalculateWidget extends StatelessWidget {
   }
 
   Widget _buildSquareTextField(
-      {required TextEditingController textcontroller, required int index}) {
+      {required TextEditingController textcontroller, required int index, required String line}) {
     const double borderRadius = 8.0;
 
     return Column(
@@ -248,6 +285,7 @@ class CalculateWidget extends StatelessWidget {
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           decoration: BoxDecoration(
+            color: Colors.white,
             border: Border.all(
               color: Colors.blue,
             ),
@@ -255,15 +293,19 @@ class CalculateWidget extends StatelessWidget {
           ),
           child: Center(
             child: TextField(
+              
               textAlign: TextAlign.center,
               keyboardType: const TextInputType.numberWithOptions(),
               style: const TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
+                color: primaryColor
               ),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(1),
+                line == EngineLine.Block.getLine ?
+                FilteringTextInputFormatter.allow(RegExp("[0-6]")) : FilteringTextInputFormatter.allow(RegExp("[1-5]"))
               ],
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.zero,
@@ -288,10 +330,12 @@ class CalculateWidget extends StatelessWidget {
     const double borderRadius = 8.0;
 
     return AnimatedContainer(
+
       height: 100,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border.all(
           color: Colors.blue,
         ),
@@ -300,7 +344,7 @@ class CalculateWidget extends StatelessWidget {
       child: Center(child: Obx(() {
         return Text(value.value.toString(),
             style: const TextStyle(
-              fontSize: 40,
+              fontSize: 60,
               fontWeight: FontWeight.bold,
             ));
       })),
