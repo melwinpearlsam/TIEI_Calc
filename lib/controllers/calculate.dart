@@ -33,6 +33,20 @@ class CalculateController extends GetxController {
         (parseInput(input[4].value.text) + parseInput(input[9].value.text));
   }
 
+  void validateCalculation(int index, int fieldIndex) {
+    if (fieldIndex <= 4) {
+      print(fieldIndex);
+      print(index);
+      if(inputSums[fieldIndex + 5].value == 0) return;
+      calculateMetalSelect(index);
+    } else if (fieldIndex >= 5 && fieldIndex <= 9) {
+      print(fieldIndex);
+      print(index);
+      if(inputSums[fieldIndex - 5].value == 0) return;
+      calculateMetalSelect(index);
+    }
+  }
+
   void calculateMetalSelect(int index) {
     switch (index) {
       case 0:

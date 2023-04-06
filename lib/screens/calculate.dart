@@ -130,6 +130,7 @@ class CalculateWidget extends StatelessWidget {
                                           textcontroller:
                                               controller.input[index].value,
                                           index: index,
+                                          filedIndex: index,
                                           line: EngineLine.Crank.getLine),
                                     ))
                             .expand((widget) =>
@@ -169,7 +170,8 @@ class CalculateWidget extends StatelessWidget {
                                       child: _buildSquareTextField(
                                           textcontroller:
                                               controller.input[index + 5].value,
-                                          index: index,
+                                          filedIndex: index + 5,
+index: index,
                                           line: EngineLine.Block.getLine),
                                     ))
                             .expand((widget) =>
@@ -273,7 +275,7 @@ class CalculateWidget extends StatelessWidget {
   }
 
   Widget _buildSquareTextField(
-      {required TextEditingController textcontroller, required int index, required String line}) {
+      {required TextEditingController textcontroller, required int index, required String line, required int filedIndex}) {
     const double borderRadius = 8.0;
 
     return Column(
@@ -303,7 +305,7 @@ class CalculateWidget extends StatelessWidget {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(1),
                 line == EngineLine.Block.getLine ?
-                FilteringTextInputFormatter.allow(RegExp("[1-6]")) : FilteringTextInputFormatter.allow(RegExp("[0-5]"))
+                FilteringTextInputFormatter.allow(RegExp("[0-6]")) : FilteringTextInputFormatter.allow(RegExp("[0-5]"))
               ],
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.zero,
@@ -311,8 +313,10 @@ class CalculateWidget extends StatelessWidget {
               ),
               controller: textcontroller,
               onChanged: (value) {
-                controller.calculateInputSums();
+                controller.calculateInputSums(); 
+                if(filedIndex > 4) { 
                 controller.calculateMetalSelect(index);
+                }
                 if (value != '') {
                   Get.focusScope?.nextFocus();
                 }
