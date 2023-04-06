@@ -86,8 +86,7 @@ class CalculateWidget extends StatelessWidget {
                                 'J - ${index + 1}',
                                 style: const TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold, 
                                 ),
                               ),
                             ),
@@ -248,8 +247,7 @@ class CalculateWidget extends StatelessWidget {
                                 'J - ${index + 1}',
                                 style: const TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold, 
                                 ),
                               ),
                             ),
@@ -305,7 +303,7 @@ class CalculateWidget extends StatelessWidget {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(1),
                 line == EngineLine.Block.getLine ?
-                FilteringTextInputFormatter.allow(RegExp("[0-6]")) : FilteringTextInputFormatter.allow(RegExp("[1-5]"))
+                FilteringTextInputFormatter.allow(RegExp("[1-6]")) : FilteringTextInputFormatter.allow(RegExp("[0-5]"))
               ],
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.zero,
@@ -344,7 +342,7 @@ class CalculateWidget extends StatelessWidget {
       child: Center(child: Obx(() {
         return Text(value.value.toString(),
             style: const TextStyle(
-              fontSize: 60,
+              fontSize: 68,
               fontWeight: FontWeight.bold,
             ));
       })),
