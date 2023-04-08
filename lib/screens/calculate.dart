@@ -37,7 +37,7 @@ class CalculateWidget extends StatelessWidget {
                               onPressed: () {
                                 controller.changeVariant(
                                     EngineVariant.OnePointFive.getVariant);
-                               controller.resetFields();
+                                controller.resetFields();
                               },
                               label: EngineVariant.OnePointFive.getVariant),
                           VariantButton(
@@ -45,7 +45,7 @@ class CalculateWidget extends StatelessWidget {
                               onPressed: () {
                                 controller.changeVariant(
                                     EngineVariant.Two.getVariant);
-                               controller.resetFields();
+                                controller.resetFields();
                               },
                               label: EngineVariant.Two.getVariant),
                           VariantButton(
@@ -86,7 +86,7 @@ class CalculateWidget extends StatelessWidget {
                                 'J - ${index + 1}',
                                 style: const TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.bold, 
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -130,7 +130,6 @@ class CalculateWidget extends StatelessWidget {
                                           textcontroller:
                                               controller.input[index].value,
                                           index: index,
-                                          filedIndex: index,
                                           line: EngineLine.Crank.getLine),
                                     ))
                             .expand((widget) =>
@@ -170,8 +169,7 @@ class CalculateWidget extends StatelessWidget {
                                       child: _buildSquareTextField(
                                           textcontroller:
                                               controller.input[index + 5].value,
-                                          filedIndex: index + 5,
-index: index,
+                                          index: index,
                                           line: EngineLine.Block.getLine),
                                     ))
                             .expand((widget) =>
@@ -222,8 +220,10 @@ index: index,
                       }),
                     ],
                   ),
-                  const SizedBox(height: 20,),
-                   Obx(
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Obx(
                     () => Row(
                       children: List.generate(
                         controller.engineVariant.value ==
@@ -249,7 +249,7 @@ index: index,
                                 'J - ${index + 1}',
                                 style: const TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.bold, 
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -275,7 +275,9 @@ index: index,
   }
 
   Widget _buildSquareTextField(
-      {required TextEditingController textcontroller, required int index, required String line, required int filedIndex}) {
+      {required TextEditingController textcontroller,
+      required int index,
+      required String line}) {
     const double borderRadius = 8.0;
 
     return Column(
@@ -293,19 +295,18 @@ index: index,
           ),
           child: Center(
             child: TextField(
-              
               textAlign: TextAlign.center,
               keyboardType: const TextInputType.numberWithOptions(),
               style: const TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: primaryColor
-              ),
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: primaryColor),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(1),
-                line == EngineLine.Block.getLine ?
-                FilteringTextInputFormatter.allow(RegExp("[0-6]")) : FilteringTextInputFormatter.allow(RegExp("[0-5]"))
+                line == EngineLine.Block.getLine
+                    ? FilteringTextInputFormatter.allow(RegExp("[0-6]"))
+                    : FilteringTextInputFormatter.allow(RegExp("[0-5]"))
               ],
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.zero,
@@ -313,10 +314,10 @@ index: index,
               ),
               controller: textcontroller,
               onChanged: (value) {
-                controller.calculateInputSums(); 
-                if(filedIndex > 4) { 
+                controller.calculateInputSums();
+
                 controller.calculateMetalSelect(index);
-                }
+
                 if (value != '') {
                   Get.focusScope?.nextFocus();
                 }
@@ -332,7 +333,6 @@ index: index,
     const double borderRadius = 8.0;
 
     return AnimatedContainer(
-
       height: 100,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,

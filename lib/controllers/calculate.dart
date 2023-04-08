@@ -21,35 +21,50 @@ class CalculateController extends GetxController {
   }
 
   void calculateInputSums() {
-    inputSums[0].value =
+    if (input[0].value.text == '' || input[5].value.text == '') {
+      inputSums[0].value = -1;
+    } else {
+      inputSums[0].value =
         (parseInput(input[0].value.text) + parseInput(input[5].value.text));
-    inputSums[1].value =
+    }
+    if (input[1].value.text == '' || input[6].value.text == '') {
+      inputSums[1].value = -1;
+    } else {
+     inputSums[1].value =
         (parseInput(input[1].value.text) + parseInput(input[6].value.text));
-    inputSums[2].value =
+    }
+    if (input[2].value.text == '' || input[7].value.text == '') {
+      inputSums[2].value = -1;
+    } else {
+      inputSums[2].value =
         (parseInput(input[2].value.text) + parseInput(input[7].value.text));
-    inputSums[3].value =
+    }
+    if (input[3].value.text == '' || input[8].value.text == '') {
+      inputSums[3].value = -1;
+    } else {
+       inputSums[3].value =
         (parseInput(input[3].value.text) + parseInput(input[8].value.text));
-    inputSums[4].value =
+    }
+    if (input[4].value.text == '' || input[9].value.text == '') {
+      inputSums[4].value = -1;
+    } else {
+       inputSums[4].value =
         (parseInput(input[4].value.text) + parseInput(input[9].value.text));
+    }
+   
+   
+   
+   
   }
 
-  void validateCalculation(int index, int fieldIndex) {
-    if (fieldIndex <= 4) {
-      print(fieldIndex);
-      print(index);
-      if(inputSums[fieldIndex + 5].value == 0) return;
-      calculateMetalSelect(index);
-    } else if (fieldIndex >= 5 && fieldIndex <= 9) {
-      print(fieldIndex);
-      print(index);
-      if(inputSums[fieldIndex - 5].value == 0) return;
-      calculateMetalSelect(index);
-    }
-  }
+ 
 
   void calculateMetalSelect(int index) {
     switch (index) {
       case 0:
+      if(inputSums[0].value == -1) {
+        return;
+      } else {
         if (engineVariant.value == EngineVariant.OnePointFive.getVariant) {
           if (inputSums[0] >= 0 && inputSums[0] <= 2) {
             metalSelect[0](3);
@@ -71,10 +86,15 @@ class CalculateController extends GetxController {
             metalSelect[0](6);
           }
         }
+      }
+        
 
         break;
       case 1:
-        if (engineVariant.value == EngineVariant.OnePointFive.getVariant) {
+        if(inputSums[1].value == -1) {
+          return;
+        } else {
+          if (engineVariant.value == EngineVariant.OnePointFive.getVariant) {
           if (inputSums[1] >= 0 && inputSums[1] <= 2) {
             metalSelect[1](1);
           } else if (inputSums[1] >= 3 && inputSums[1] <= 5) {
@@ -95,9 +115,13 @@ class CalculateController extends GetxController {
             metalSelect[1](6);
           }
         }
+        }
         break;
       case 2:
-        if (engineVariant.value == EngineVariant.OnePointFive.getVariant) {
+        if(inputSums[2].value == -1) {
+          return;
+        } else {
+          if (engineVariant.value == EngineVariant.OnePointFive.getVariant) {
           if (inputSums[2] >= 0 && inputSums[2] <= 2) {
             metalSelect[2](1);
           } else if (inputSums[2] >= 3 && inputSums[2] <= 5) {
@@ -117,10 +141,14 @@ class CalculateController extends GetxController {
           } else if (inputSums[2] >= 9 && inputSums[2] <= 11) {
             metalSelect[2](4);
           }
+        }
         }
         break;
       case 3:
-        if (engineVariant.value == EngineVariant.OnePointFive.getVariant) {
+       if(inputSums[3].value == -1) {
+        return;
+       } else {
+         if (engineVariant.value == EngineVariant.OnePointFive.getVariant) {
           if (inputSums[3] >= 0 && inputSums[3] <= 2) {
             metalSelect[3](3);
           } else if (inputSums[3] >= 3 && inputSums[3] <= 5) {
@@ -141,9 +169,13 @@ class CalculateController extends GetxController {
             metalSelect[3](6);
           }
         }
+       }
         break;
       case 4:
-        if (engineVariant.value == EngineVariant.Two.getVariant) {
+        if(inputSums[4].value == -1) {
+          return;
+        } else {
+            if (engineVariant.value == EngineVariant.Two.getVariant) {
           if (inputSums[4] >= 0 && inputSums[4] <= 2) {
             metalSelect[4](3);
           } else if (inputSums[4] >= 3 && inputSums[4] <= 5) {
@@ -153,6 +185,7 @@ class CalculateController extends GetxController {
           } else if (inputSums[4] >= 9 && inputSums[4] <= 11) {
             metalSelect[4](6);
           }
+        }
         }
 
         break;
